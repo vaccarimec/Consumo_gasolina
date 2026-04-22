@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculadora de Gastos</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(180deg, #050b18, #0b1220);
+  color: white;
+}
+
+.container {
+  max-width: 480px;
+  margin: auto;
+  padding: 20px;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+.sub {
+  opacity: 0.6;
+  margin-bottom: 20px;
+}
+
+.card {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.section-title {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.section-sub {
+  font-size: 13px;
+  opacity: 0.6;
+  margin-bottom: 15px;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.label {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  background: #020617;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.input-box input {
+  flex: 1;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  color: white;
+  outline: none;
+}
+
+.unit {
+  padding: 12px;
+  border-left: 1px solid #334155;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* cores icones */
+.icon-red { color: #fb7185; }
+.icon-blue { color: #60a5fa; }
+.icon-yellow { color: #facc15; }
+.icon-green { color: #4ade80; }
+.icon-purple { color: #a78bfa; }
+
+/* botões */
+button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-calcular {
+  background: linear-gradient(90deg, #6366f1, #3b82f6);
+}
+
+.btn-limpar {
+  background: transparent;
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}
+
+/* resultados */
+.result-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid #1e293b;
+}
+
+.result-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.result-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.result-sub {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.valor {
+  font-weight: bold;
+}
+
+/* cores resultado */
+.blue { color: #60a5fa; }
+.green { color: #4ade80; }
+.yellow { color: #facc15; }
+
+.pessoa-box {
+  margin-top: 15px;
+  padding: 15px;
+  border-radius: 12px;
+  border: 1px solid #7c3aed;
+  background: rgba(124,58,237,0.1);
+  display: flex;
+  justify-content: space-between;
+}
+
+.pessoa-box span {
+  color: #a78bfa;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.footer {
+  margin-top: 15px;
+  font-size: 13px;
+  opacity: 0.6;
+  text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>⛽ Calculadora de Gastos</h1>
+<div class="sub">Calcule e divida gastos de combustível e pedágio</div>
+
+<div class="card">
+  <div class="section-title">📊 Dados da Viagem</div>
+  <div class="section-sub">Preencha os dados abaixo para calcular os custos</div>
+
+  <div class="input-group">
+    <div class="label"><i class="fa-solid fa-car icon-red"></i> Km percorrido</div>
+    <div class="input-box">
+      <input id="km" placeholder="Ex: 127">
+      <div class="unit">km</div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <div class="label"><i class="fa-solid fa-gauge icon-blue"></i> Consumo</div>
+    <div class="input-box">
+      <input id="consumo" placeholder="Ex: 11.5">
+      <div class="unit">km/L</div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <div class="label"><i class="fa-solid fa-droplet icon-yellow"></i> Preço gasolina</div>
+    <div class="input-box">
+      <input id="preco" placeholder="Ex: 6.78">
+      <div class="unit">R$/L</div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <div class="label"><i class="fa-solid fa-road icon-green"></i> Pedágio</div>
+    <div class="input-box">
+      <input id="pedagio" placeholder="Ex: 30.00">
+      <div class="unit">R$</div>
+    </div>
+  </div>
+
+  <div class="input-group">
+    <div class="label"><i class="fa-solid fa-users icon-purple"></i> Pessoas</div>
+    <div class="input-box">
+      <input id="pessoas" placeholder="Ex: 3">
+      <div class="unit">pessoas</div>
+    </div>
+  </div>
+
+  <button class="btn-calcular" onclick="calcular()">Calcular Divisão</button>
+  <button class="btn-limpar" onclick="limpar()">Limpar Tudo</button>
+</div>
+
+<div class="card">
+
+  <div class="section-title">📊 Resultados</div>
+
+  <div class="result-item">
+    <div class="result-left">
+      <div class="result-title"><i class="fa-solid fa-gas-pump blue"></i> Custo do Combustível</div>
+      <div class="result-sub">Gasto apenas com gasolina</div>
+    </div>
+    <div class="valor blue">R$ <span id="gasolina">0.00</span></div>
+  </div>
+
+  <div class="result-item">
+    <div class="result-left">
+      <div class="result-title"><i class="fa-solid fa-road green"></i> Custo do Pedágio</div>
+      <div class="result-sub">Valor total do pedágio</div>
+    </div>
+    <div class="valor green">R$ <span id="pedagioRes">0.00</span></div>
+  </div>
+
+  <div class="result-item">
+    <div class="result-left">
+      <div class="result-title"><i class="fa-solid fa-calculator yellow"></i> Custo Total</div>
+      <div class="result-sub">Combustível + Pedágio</div>
+    </div>
+    <div class="valor yellow">R$ <span id="total">0.00</span></div>
+  </div>
+
+  <div class="pessoa-box">
+    <div>👥 Valor por Pessoa</div>
+    <span>R$ <span id="pessoa">0.00</span></span>
+  </div>
+
+</div>
+
+<div class="footer">
+Feito com ❤️ para facilitar suas viagens
+</div>
+
+</div>
+
+<script>
+function calcular() {
+  let km = parseFloat(document.getElementById("km").value);
+  let consumo = parseFloat(document.getElementById("consumo").value);
+  let preco = parseFloat(document.getElementById("preco").value);
+  let pedagio = parseFloat(document.getElementById("pedagio").value) || 0;
+  let pessoas = parseInt(document.getElementById("pessoas").value);
+
+  if (!km || !consumo || !preco || !pessoas) {
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  let litros = km / consumo;
+  let custoGas = litros * preco;
+  let total = custoGas + pedagio;
+  let porPessoa = total / pessoas;
+
+  document.getElementById("gasolina").innerText = custoGas.toFixed(2);
+  document.getElementById("pedagioRes").innerText = pedagio.toFixed(2);
+  document.getElementById("total").innerText = total.toFixed(2);
+  document.getElementById("pessoa").innerText = porPessoa.toFixed(2);
+}
+
+function limpar() {
+  document.querySelectorAll("input").forEach(i => i.value = "");
+  document.querySelectorAll("span").forEach(s => s.innerText = "0.00");
+}
+</script>
+
+</body>
+</html>
