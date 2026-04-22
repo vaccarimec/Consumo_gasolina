@@ -102,9 +102,15 @@ button {
   font-size: 16px;
   cursor: pointer;
 }
-
 .btn-calcular {
-  background: linear-gradient(90deg, #6366f1, #3b82f6);
+  background: transparent;
+  border: 1px solid #6366f1;
+  color: #6366f1;
+  transition: 0.3s;
+}
+
+.btn-calcular:hover {
+  background: rgba(99,102,241,0.1);
 }
 
 .btn-limpar {
